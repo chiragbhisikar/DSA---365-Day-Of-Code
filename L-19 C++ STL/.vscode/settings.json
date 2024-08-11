@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "array": "cpp",
+        "vector": "cpp",
+        "iostream": "cpp",
+        "__bit_reference": "cpp",
+        "map": "cpp",
+        "ostream": "cpp"
+    }
+}
