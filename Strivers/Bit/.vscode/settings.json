@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "__bit_reference": "cpp",
+        "vector": "cpp",
+        "__node_handle": "cpp",
+        "bitset": "cpp",
+        "deque": "cpp",
+        "__memory": "cpp",
+        "limits": "cpp",
+        "optional": "cpp",
+        "ratio": "cpp",
+        "regex": "cpp",
+        "scoped_allocator": "cpp",
+        "tuple": "cpp",
+        "ostream": "cpp",
+        "iostream": "cpp"
+    }
+}

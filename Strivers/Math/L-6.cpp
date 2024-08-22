@@ -29,7 +29,7 @@ void sieveOfEratosthenes(int n)
 
     printArray(arr);
 
-    for (int i = 2; i <= (i * i); i++)
+    for (int i = 2; (i * i) <= n; i++)
     {
         if (arr[i] == 1)
         {
