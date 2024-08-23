@@ -13,3 +13,4 @@ int main()
     int ans = (1 << checkSetIndex) ^ number;
     cout << ans << endl;
     return 0;
+}

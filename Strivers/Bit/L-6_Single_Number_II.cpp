@@ -61,6 +61,7 @@ int singleNumber(vector<int> &nums)
 
     return ones;
 }
+
 int main()
 {
     vector<int> nums;

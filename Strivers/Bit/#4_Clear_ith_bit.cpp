@@ -6,9 +6,10 @@ using namespace std;
 
 int main()
 {
-    int number = 13;
-    int checkSetIndex = 2;
-    int ans = ~(1 << checkSetIndex);
+    int number = 7;
+    int checkSetIndex = 1;
+    int ans = 0;
+    ans = ~(1 << checkSetIndex);
     ans = ans & number;
 
     cout << ans << endl;

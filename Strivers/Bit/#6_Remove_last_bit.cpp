@@ -10,7 +10,8 @@ int main()
     int number = 13;
     // 1 1 0 1
     // 1 1 0 0
-    int ans = number & (number - 1);
+    int ans = number - 1;
+    ans = ans & number;
     cout << ans << endl;
     return 0;
 }
