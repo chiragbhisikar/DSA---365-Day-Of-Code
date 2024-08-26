@@ -65,14 +65,27 @@ int singleNumber(vector<int> &nums)
 int main()
 {
     vector<int> nums;
-    nums.push_back(0);
-    nums.push_back(1);
-    nums.push_back(0);
-    nums.push_back(1);
-    nums.push_back(0);
-    nums.push_back(1);
+    // nums.push_back(0);
+    // nums.push_back(1);
+    // nums.push_back(0);
+    // nums.push_back(1);
+    // nums.push_back(0);
+    // nums.push_back(1);
     nums.push_back(2);
+    nums.push_back(2);
+    nums.push_back(2);
+    nums.push_back(1);
 
-    cout << singleNumber(nums) << endl;
+    // cout << singleNumber(nums) << endl;
+
+    int ones = 0, twos = 0;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        cout << "1st => " << (ones ^ nums[i]) << " " << ~twos << " " << ((ones ^ nums[i]) & ~twos) << endl;
+        ones = (ones ^ nums[i]) & ~twos;
+        cout << "2nd => " << (twos ^ nums[i]) << " " << ~ones << " " << ((twos ^ nums[i]) & ~ones) << endl;
+        twos = (twos ^ nums[i]) & ~ones;
+    }
+
     return 0;
 }
