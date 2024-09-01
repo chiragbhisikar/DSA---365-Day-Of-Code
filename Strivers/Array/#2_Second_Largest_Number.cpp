@@ -27,8 +27,7 @@ int getSecondLargest(int arr[], int n)
 
 int getSecondSmallest(int arr[], int n)
 {
-    int min = arr[0];
-    int secondSmallest = INT_MAX;
+    int min = arr[0], secondSmallest = INT_MAX;
 
     for (int i = 0; i < n; i++)
     {
@@ -37,14 +36,11 @@ int getSecondSmallest(int arr[], int n)
             secondSmallest = min;
             min = arr[i];
         }
-        else if (arr[i] != min && arr[i] < secondSmallest)
+        else if (arr[i] != min && secondSmallest > arr[i])
         {
             secondSmallest = arr[i];
         }
     }
-    cout << endl;
-    cout << "Second Smallest Element Is " << secondSmallest << endl;
-
     return secondSmallest;
 }
 
