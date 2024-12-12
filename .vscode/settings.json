@@ -4,6 +4,7 @@
         "regex": "cpp",
         "vector": "cpp",
         "string": "cpp",
-        "array": "cpp"
+        "array": "cpp",
+        "limits": "cpp"
     }
 }
