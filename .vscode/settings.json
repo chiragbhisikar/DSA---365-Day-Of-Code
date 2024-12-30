@@ -5,6 +5,7 @@
         "vector": "cpp",
         "string": "cpp",
         "array": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "ios": "cpp"
     }
 }
