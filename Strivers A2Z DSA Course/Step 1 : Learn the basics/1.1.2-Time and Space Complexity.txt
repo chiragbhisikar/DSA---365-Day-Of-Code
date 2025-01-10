@@ -1,0 +1,27 @@
+Time Complexity is Rate at which the time taken increases with respect to input size.
+
+Time Complexity is calculated in BigO notation.
+3 rules for calculating TC:
+Calculate with worst case scenario.
+Avoid Constants
+Avoid Lower Values
+
+
+BigO-worst scenario
+Theta-average case scenario
+Omega- Best Case Scenario
+
+Space Complexity:
+SC is also calculated in BigO notation itself 
+
+There are two spaces.
+1.Auxilalry Space:The space taken to solve problem and store solution.
+2.Input Space:The space taken to store the inputs.
+
+
+C=a+b
+
+Where C is auxillary Space.
+a and b are input space.
+
+While coding, tampering the input for SC is wrong practice.

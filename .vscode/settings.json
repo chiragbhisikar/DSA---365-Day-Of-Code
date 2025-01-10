@@ -6,6 +6,9 @@
         "string": "cpp",
         "array": "cpp",
         "limits": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "new": "cpp",
+        "iostream": "cpp",
+        "string_view": "cpp"
     }
 }
