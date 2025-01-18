@@ -38,6 +38,20 @@ void print(Node *head)
     cout << endl;
 }
 
+void insertAtCorrectOrder(Node *head, Node *current, Node *next)
+{
+    if (current == NULL)
+    {
+        head = next;
+        current = next;
+    }
+    else
+    {
+        current->next = next;
+        current = current->next;
+    }
+}
+
 Node *sortTwoLists(Node *first, Node *second)
 {
     if (first == NULL)
@@ -71,6 +85,7 @@ Node *sortTwoLists(Node *first, Node *second)
                 current->next = currentSecond;
                 current = current->next;
             }
+
             currentSecond = next;
         }
         else
@@ -87,6 +102,7 @@ Node *sortTwoLists(Node *first, Node *second)
                 current->next = currentFirst;
                 current = current->next;
             }
+
             currentFirst = next;
         }
     }
@@ -107,7 +123,6 @@ Node *sortTwoLists(Node *first, Node *second)
         currentSecond = next;
     }
 
-   
     return head;
 }
 

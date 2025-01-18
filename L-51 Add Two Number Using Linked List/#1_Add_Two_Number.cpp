@@ -85,6 +85,55 @@ Node *add(Node *num1, Node *num2)
     Node *tempSecond = num2;
     int carry = 0;
 
+    // Approach 1 -> Messi
+    /*
+        while (tempFirst != NULL && tempSecond != NULL)
+        {
+            int firstData = tempFirst->data;
+            int secondData = tempSecond->data;
+
+            int sum = firstData + secondData + carry;
+            int digit = sum % 10;
+
+            insertAtTail(ansHead, ansTail, digit);
+            carry = sum / 10;
+
+            tempFirst = tempFirst->next;
+            tempSecond = tempSecond->next;
+        }
+
+        while (tempFirst != NULL)
+        {
+            int firstData = tempFirst->data;
+            int sum = firstData + carry;
+            int digit = sum % 10;
+
+            insertAtTail(ansHead, ansTail, digit);
+            carry = sum / 10;
+
+            tempFirst = tempFirst->next;
+        }
+
+        while (tempSecond != NULL)
+        {
+            int secondData = tempSecond->data;
+            int sum = secondData + carry;
+            int digit = sum % 10;
+
+            insertAtTail(ansHead, ansTail, digit);
+            carry = sum / 10;
+
+            tempSecond = tempSecond->next;
+        }
+
+        while (carry != 0)
+        {
+            insertAtTail(ansHead, ansTail, carry);
+            carry = carry / 10;
+        }
+
+    */
+    // Approach 2 -> Generic
     while (tempFirst != NULL || tempSecond != NULL || carry != 0)
     {
         int firstData = 0;
@@ -111,7 +160,6 @@ Node *add(Node *num1, Node *num2)
         if (tempSecond != NULL)
             tempSecond = tempSecond->next;
     }
-
     return ansHead;
 }
 
