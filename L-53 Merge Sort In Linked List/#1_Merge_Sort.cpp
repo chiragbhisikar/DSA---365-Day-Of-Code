@@ -38,7 +38,7 @@ void print(Node *head)
     cout << endl;
 }
 
-// head , current ,currentFirst
+// // head , current ,currentFirst
 void insertAtCorrectOrder(Node *&head, Node *&current, Node *&currentNode)
 {
     Node *next = currentNode->next;
@@ -97,34 +97,69 @@ Node *sortTwoLists(Node *first, Node *second)
     return head;
 }
 
+Node *findMiddle(Node *head)
+{
+    if (head == NULL || head->next == NULL)
+    {
+        return head;
+    }
+
+    Node *slow = head;
+    Node *fast = head->next;
+
+    while (fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+Node *mergeSort(Node *head)
+{
+    // base case
+    if (head == NULL || head->next == NULL)
+    {
+        return head;
+    }
+
+    // break linked list into 2 halvs, after finding mid
+    Node *mid = findMiddle(head);
+
+    Node *left = head;
+    Node *right = mid->next;
+    mid->next = NULL;
+
+    // recursive calls to sort both halves
+    left = mergeSort(left);
+    right = mergeSort(right);
+
+    // merge both left and right halves
+    Node *result = sortTwoLists(left, right);
+
+    return result;
+}
+
 int main()
 {
-    Node *n1 = new Node(1);
-    Node *n2 = new Node(3);
-    Node *n3 = new Node(5);
+
+    Node *n1 = new Node(6);
+    Node *n2 = new Node(5);
+    Node *n3 = new Node(4);
+    Node *n4 = new Node(3);
+    Node *n5 = new Node(2);
+    Node *n6 = new Node(1);
+
     n1->next = n2;
     n2->next = n3;
-    n3->next = NULL;
-
-    // 1 3 6 10 - 1
-
-    Node *n4 = new Node(1);
-    Node *n5 = new Node(3);
-    Node *n6 = new Node(6);
-    Node *n7 = new Node(10);
+    n3->next = n4;
     n4->next = n5;
     n5->next = n6;
-    n6->next = n7;
-    n7->next = NULL;
+    n6->next = NULL;
 
-    Node *first = n1;
-    Node *second = n4;
-
-    print(first);
-    print(second);
-
-    Node *sortedListHead = sortTwoLists(first, second);
+    print(n1);
+    Node *sortedListHead = mergeSort(n1);
     print(sortedListHead);
-
     return 0;
 }
