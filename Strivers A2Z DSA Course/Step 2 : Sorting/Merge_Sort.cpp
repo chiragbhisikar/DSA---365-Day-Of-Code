@@ -58,7 +58,7 @@ void mergeSort(int arr[], int low, int high)
         return;
 
     int mid = (low + high) / 2;
-    mergeSort(arr, 0, mid);
+    mergeSort(arr, low, mid);
     mergeSort(arr, mid + 1, high);
 
     merge(arr, low, mid, high);
