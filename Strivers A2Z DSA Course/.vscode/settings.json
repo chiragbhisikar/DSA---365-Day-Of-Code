@@ -6,6 +6,11 @@
         "vector": "cpp",
         "map": "cpp",
         "iostream": "cpp",
-        "__bit_reference": "cpp"
+        "__bit_reference": "cpp",
+        "unordered_set": "cpp",
+        "__split_buffer": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "string": "cpp"
     }
 }
