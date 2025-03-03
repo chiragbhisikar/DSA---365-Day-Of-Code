@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -41,8 +42,6 @@ Node *buildTree(Node *root)
 
 void levelOrderTraversal(Node *root)
 {
-    vector<vector<int>> answer;
-    vector<int> data;
     queue<Node *> q;
     q.push(root);
     q.push(NULL);
@@ -55,8 +54,6 @@ void levelOrderTraversal(Node *root)
 
         if (temp == NULL) // old level complete travels
         {
-            answer.push_back(data);
-            data.clear();
             cout << endl;
             if (!q.empty()) // queue still has child nodes
             {
@@ -66,7 +63,6 @@ void levelOrderTraversal(Node *root)
         else
         {
             cout << temp->data << "  ";
-            data.push_back(temp->data);
             if (temp->left != NULL)
             {
                 q.push(temp->left);
@@ -78,23 +74,33 @@ void levelOrderTraversal(Node *root)
             }
         }
     }
+}
 
-    for (int i = 0; i < answer.size(); i++)
-    {
-        for (int j = 0; j < answer[i].size(); j++)
-        {
-            cout << answer[i][j] << " ";
-        }
-        cout << endl;
-    }
+int getHeight(Node *root)
+{
+    if (root == NULL)
+        return 0;
+
+    int left = getHeight(root->left);
+    int right = getHeight(root->right);
+
+    int answer = max(left, right) + 1;
+
+    return answer;
+}
+
+int heightOfTree(Node *root)
+{
+    return getHeight(root);
 }
 
 int main()
 {
     Node *root = NULL;
-    // 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 21 -1 -1
+    // 1 2 4 -1 -1 5 -1 -1 3 -1 -1
     root = buildTree(root);
     cout << "\nlevelOrderTraversal: " << endl;
     levelOrderTraversal(root);
+    cout << "Height Tree = " << heightOfTree(root) << endl;
     return 0;
 }

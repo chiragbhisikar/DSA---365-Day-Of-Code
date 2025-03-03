@@ -17,32 +17,8 @@ public:
     }
 };
 
-Node *buildTree(Node *root)
-{
-    int data;
-    cout << "Enter the data: ";
-    cin >> data;
-
-    root = new Node(data);
-
-    if (data == -1)
-    {
-        return NULL;
-    }
-
-    cout << "Enter the data for inserting in left of " << data << ": " << endl;
-    root->left = buildTree(root->left);
-
-    cout << "Enter the data for inserting in right of " << data << ": " << endl;
-    root->right = buildTree(root->right);
-
-    return root;
-}
-
 void levelOrderTraversal(Node *root)
 {
-    vector<vector<int>> answer;
-    vector<int> data;
     queue<Node *> q;
     q.push(root);
     q.push(NULL);
@@ -55,8 +31,6 @@ void levelOrderTraversal(Node *root)
 
         if (temp == NULL) // old level complete travels
         {
-            answer.push_back(data);
-            data.clear();
             cout << endl;
             if (!q.empty()) // queue still has child nodes
             {
@@ -66,7 +40,6 @@ void levelOrderTraversal(Node *root)
         else
         {
             cout << temp->data << "  ";
-            data.push_back(temp->data);
             if (temp->left != NULL)
             {
                 q.push(temp->left);
@@ -78,23 +51,51 @@ void levelOrderTraversal(Node *root)
             }
         }
     }
+}
 
-    for (int i = 0; i < answer.size(); i++)
+Node *insertIntoBST(Node *&root, int data)
+{
+
+    if (root == NULL)
     {
-        for (int j = 0; j < answer[i].size(); j++)
-        {
-            cout << answer[i][j] << " ";
-        }
-        cout << endl;
+        root = new Node(data);
+        return root;
+    }
+
+    Node *newNode = new Node(data);
+    // insert at right part
+    if (data > root->data)
+    {
+        root->right = insertIntoBST(root->right, data);
+    }
+    // insert at left part
+    else
+    {
+        root->left = insertIntoBST(root->left, data);
+    }
+
+    return root;
+}
+
+void takeInput(Node *&root)
+{
+    int data;
+    cin >> data;
+    while (data != -1)
+    {
+        root = insertIntoBST(root, data);
+        cin >> data;
     }
 }
 
 int main()
 {
     Node *root = NULL;
-    // 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 21 -1 -1
-    root = buildTree(root);
-    cout << "\nlevelOrderTraversal: " << endl;
+    cout << "enter data to create binary search tree: ";
+    takeInput(root);
+    cout << "Printing a bst: ";
     levelOrderTraversal(root);
+    // 8 3 10 1 6 14 4 7 13 -1
+    // 1 5 7 3 4 2 6 -1
     return 0;
 }

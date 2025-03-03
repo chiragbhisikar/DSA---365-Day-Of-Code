@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -41,8 +42,6 @@ Node *buildTree(Node *root)
 
 void levelOrderTraversal(Node *root)
 {
-    vector<vector<int>> answer;
-    vector<int> data;
     queue<Node *> q;
     q.push(root);
     q.push(NULL);
@@ -55,8 +54,6 @@ void levelOrderTraversal(Node *root)
 
         if (temp == NULL) // old level complete travels
         {
-            answer.push_back(data);
-            data.clear();
             cout << endl;
             if (!q.empty()) // queue still has child nodes
             {
@@ -66,7 +63,6 @@ void levelOrderTraversal(Node *root)
         else
         {
             cout << temp->data << "  ";
-            data.push_back(temp->data);
             if (temp->left != NULL)
             {
                 q.push(temp->left);
@@ -78,23 +74,47 @@ void levelOrderTraversal(Node *root)
             }
         }
     }
+}
 
-    for (int i = 0; i < answer.size(); i++)
+bool isSameTree(Node *p, Node *q)
+{
+    if (p == NULL && q == NULL)
     {
-        for (int j = 0; j < answer[i].size(); j++)
-        {
-            cout << answer[i][j] << " ";
-        }
-        cout << endl;
+        return true;
     }
+
+    if (p == NULL && q != NULL || p != NULL && q == NULL)
+    {
+        return false;
+    }
+
+    int left = isSameTree(p->left, q->left);
+    int right = isSameTree(p->right, q->right);
+
+    bool value = p->data == q->data;
+
+    if (left && right && value)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 int main()
 {
-    Node *root = NULL;
-    // 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 21 -1 -1
-    root = buildTree(root);
+    Node *root1 = NULL;
+    Node *root2 = NULL;
+    // 1 2 4 -1 -1 5 -1 -1 3 -1 -1
+    root1 = buildTree(root1);
+    root2 = buildTree(root2);
+
     cout << "\nlevelOrderTraversal: " << endl;
-    levelOrderTraversal(root);
+    levelOrderTraversal(root1);
+    cout << "\nlevelOrderTraversal: " << endl;
+    levelOrderTraversal(root2);
+
+    cout << "Same Tree = " << (isSameTree(root1, root2) ? "Yes" : "No") << endl;
+
     return 0;
 }

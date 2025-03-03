@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -41,8 +42,6 @@ Node *buildTree(Node *root)
 
 void levelOrderTraversal(Node *root)
 {
-    vector<vector<int>> answer;
-    vector<int> data;
     queue<Node *> q;
     q.push(root);
     q.push(NULL);
@@ -55,8 +54,6 @@ void levelOrderTraversal(Node *root)
 
         if (temp == NULL) // old level complete travels
         {
-            answer.push_back(data);
-            data.clear();
             cout << endl;
             if (!q.empty()) // queue still has child nodes
             {
@@ -66,7 +63,6 @@ void levelOrderTraversal(Node *root)
         else
         {
             cout << temp->data << "  ";
-            data.push_back(temp->data);
             if (temp->left != NULL)
             {
                 q.push(temp->left);
@@ -78,23 +74,49 @@ void levelOrderTraversal(Node *root)
             }
         }
     }
+}
 
-    for (int i = 0; i < answer.size(); i++)
+// pair<Is Balanced Or Not, height of tree>
+pair<bool, int> isBalancedFast(Node *root)
+{
+    if (root == NULL)
     {
-        for (int j = 0; j < answer[i].size(); j++)
-        {
-            cout << answer[i][j] << " ";
-        }
-        cout << endl;
+        pair<bool, int> p = make_pair(true, 0);
+        return p;
     }
+
+    pair<bool, int> left = isBalancedFast(root->left);
+    pair<bool, int> right = isBalancedFast(root->right);
+
+    bool leftAns = left.first;
+    bool rightAns = right.first;
+    bool differenceCheck = abs(left.second - right.second) <= 1;
+
+    pair<bool, int> answer;
+    // calculate height
+    answer.second = max(left.second, right.second) + 1;
+    if (leftAns && rightAns && differenceCheck)
+    {
+        answer.first = true;
+        return answer;
+    }
+
+    answer.first = false;
+    return answer;
+}
+
+bool isBalanced(Node *root)
+{
+    return isBalancedFast(root).first;
 }
 
 int main()
 {
     Node *root = NULL;
-    // 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 21 -1 -1
+    // 1 2 4 -1 -1 5 -1 -1 3 -1 -1
     root = buildTree(root);
     cout << "\nlevelOrderTraversal: " << endl;
     levelOrderTraversal(root);
+    cout << "Tree is " << (isBalanced(root) ? "Balanced" : "Not Balanced") << endl;
     return 0;
 }
