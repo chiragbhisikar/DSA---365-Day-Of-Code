@@ -18,5 +18,6 @@ int main()
     getline(cin, s);
     string fileName = renameFile(s);
     cout << fileName << endl;
+
     return 0;
 }
