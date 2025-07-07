@@ -2,30 +2,23 @@
 
 using namespace std;
 
-vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)
+int detectCycleInDirectedGraph(int n, vector<pair<int, int>> &edges)
 {
-    // prepare adjList
+    // prepare adjuncecy list and indegree
     unordered_map<int, list<int>> adjList;
-    for (int i = 0; i < e; i++)
+    vector<int> indegree(n);
+
+    for (int i = 0; i < edges.size(); i++)
     {
-        int u = edges[i][0];
-        int v = edges[i][1];
+        int u = edges[i].first - 1;
+        int v = edges[i].second - 1;
 
         adjList[u].push_back(v);
-    }
-
-    // prepare indegree of all
-    vector<int> indegree(v);
-
-    for (int i = 0; i < e; i++)
-    {
-        int v = edges[i][1];
-
         indegree[v]++;
     }
 
     queue<int> q;
-    for (int i = 0; i < v; i++)
+    for (int i = 0; i < n; i++)
     {
         if (indegree[i] == 0)
         {
@@ -33,13 +26,16 @@ vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)
         }
     }
 
+    vector<bool> visited(n);
+    int count = 0;
+
     // do bfs
-    vector<int> ans;
     while (!q.empty())
     {
         int front = q.front();
         q.pop();
-        ans.push_back(front);
+
+        count++;
 
         for (auto neighbour : adjList[front])
         {
@@ -51,7 +47,17 @@ vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)
         }
     }
 
-    return ans;
+    if (count == n)
+    {
+        return 0;
+    }
+    // invalid topological Sort Means Cycle Detect
+    else
+    {
+        return 1;
+    }
+
+    return 0;
 }
 
 int main()
